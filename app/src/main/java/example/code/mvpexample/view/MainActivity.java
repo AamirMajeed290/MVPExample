@@ -26,6 +26,7 @@ private MainActivityContract.Presenter presenter;
 
         presenter.getWifies();
         //presenter.getWifies("f45df136seXZ");
+        //ssssssssss
 
 
 
