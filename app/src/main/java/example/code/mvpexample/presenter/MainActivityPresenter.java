@@ -2,16 +2,20 @@ package example.code.mvpexample.presenter;
 
 import android.content.Context;
 
-import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import example.code.mvpexample.network.model.ApiClient;
 import example.code.mvpexample.network.model.ApiService;
+import example.code.mvpexample.network.model.Reply;
 import example.code.mvpexample.network.model.apipojos.Results;
 import example.code.mvpexample.network.model.apipojos.Wifi;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+
 
 public class MainActivityPresenter implements MainActivityContract.Presenter {
 
@@ -77,6 +81,41 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
                                            @Override
                                            public void onSuccess(Wifi wifi) {
                                                view.setResults(wifi);
+
+
+
+                                           }
+
+                                           @Override
+                                           public void onError(Throwable e) {
+                                               view.setErrorMessage(e.getMessage());
+                                           }
+                                       }
+                        )
+
+
+
+        );
+    }
+
+
+    public void addWifi(Wifi wifi)
+    {
+
+        apiService= ApiClient.getClient(context).create(ApiService.class);
+        compositeDisposable.add(
+
+                apiService.addWifi(wifi)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableSingleObserver<Reply>()
+
+                                       {
+
+                                           @Override
+                                           public void onSuccess(Reply reply) {
+                                               view.setResults(reply);
+
 
 
 

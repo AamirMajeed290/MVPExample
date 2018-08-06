@@ -3,14 +3,18 @@ import android.content.Context;
 import android.text.TextUtils;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 
 import example.code.mvpexample.Const;
 import example.code.mvpexample.Utils.PrefUtils;
+import okhttp3.ConnectionSpec;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -26,11 +30,20 @@ public class ApiClient {
         if (okHttpClient == null)
             initOkHttp(context);
         if (retrofit == null) {
+
+
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+
+
+
             retrofit = new Retrofit.Builder() //sign pattern
                     .baseUrl(Const.BASE_URL)
                     .client(okHttpClient)
+
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
         return retrofit;
@@ -62,5 +75,12 @@ public class ApiClient {
             }
         });
         okHttpClient = httpClient.build();
+
+
+        /*okHttpClient = new OkHttpClient.Builder()
+                .connectionSpecs(Arrays.asList(
+                        ConnectionSpec.MODERN_TLS,
+                        ConnectionSpec.COMPATIBLE_TLS))
+                .build();*/
     }
 }
