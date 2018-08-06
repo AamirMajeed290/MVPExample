@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">MVPExample</string>
+<string name="app_name">MVPExample</string>
+<string name="action_settings">Settings</string>
+<string name="password">Please Enter Password</string>
+<string name="submit">Submit</string>
+<string name="cancel">Cancel</string>
 </resources>
