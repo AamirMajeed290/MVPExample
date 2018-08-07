@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         }
     }
 
-
+/*
 
     public String currentPassword() {
 
@@ -366,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
           password=e.getMessage();
         }
         return password;
-    }
+    }*/
 
 
 }
