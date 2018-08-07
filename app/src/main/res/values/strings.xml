@@ -4,4 +4,7 @@
 <string name="password">Please Enter Password</string>
 <string name="submit">Submit</string>
 <string name="cancel">Cancel</string>
+    <string name="ten_wifi">ten wifi</string>
+    <string name="show_wifi_image">show wifi image</string>
+    <string name="show_password">show password</string>
 </resources>

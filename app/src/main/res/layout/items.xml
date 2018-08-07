@@ -18,13 +18,14 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="ten wifi"
+            android:text="@string/ten_wifi"
             android:textColor="#374ea2"
             android:textSize="20dp"
             android:layout_weight="0.96" />
 
         <ImageView
             android:layout_width="63dp"
+            android:contentDescription="@string/show_wifi_image"
             android:layout_height="36dp"
             app:srcCompat="@drawable/wifi"
             android:id="@+id/imageView2"
