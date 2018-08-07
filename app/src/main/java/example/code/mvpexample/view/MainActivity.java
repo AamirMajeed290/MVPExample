@@ -56,8 +56,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements MainActivityContract.view {
 
 
-    String ssid;
-    String connectedSsid;
+    String ssid="";
+
   ImageView imageView;
     String password;
     private Element[] nets;
@@ -80,7 +80,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         this.wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        connectedSsid=wifiInfo.getSSID();
+        ssid=wifiInfo.getSSID().trim().toString();
+        password=currentWifiPassword();
+       
+
 
 
 
@@ -181,12 +184,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
                     edt_Password.setError("Please Enter Password");
                 } else {
 
-                    if(setSsidAndPassword(getApplicationContext(),ssid,password))
 
-                    {
 
                         presenter.getWifies(ssid);
-                    }
+
 
                     dialog.dismiss();
 
@@ -217,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
             View item = inflater.inflate(R.layout.items, null);
             TextView tvSsid = (TextView) item.findViewById(R.id.tvSSID);
             ImageView imageView=(ImageView)item.findViewById(R.id.imageView2);
-            if(('"'+nets[position].getTitle().toString()+'"').equals(connectedSsid.trim()))
+            if(('"'+nets[position].getTitle().toString()+'"').equals(ssid.trim()))
             {
                 imageView.setImageResource(R.drawable.connectedwifi);
             }
@@ -255,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
         Log.i("wififound", "User Id: " + wifi.getWifiSsid());
 
-        if(!ssid.equals(wifi.getWifiSsid())) {
+        if(!ssid.equals(wifi.getWifiSsid())||wifi.getWifiSsid().equals(null)) {
 
             Wifi newrecord = new Wifi();
             newrecord.setUserId(getUniqueID());
@@ -320,43 +321,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
 //need fixingsss
-    public boolean setSsidAndPassword(Context context, String ssid3, String ssidPassword) {
-        try {
-
-            Method getConfigMethod = this.wifiManager.getClass().getMethod("getWifiApConfiguration");
-            WifiConfiguration wifiConfig = (WifiConfiguration) getConfigMethod.invoke(this.wifiManager);
 
 
-            Log.i("wifipass",wifiConfig.preSharedKey.toString());
 
 
-            wifiConfig.SSID = ssid3;
-            wifiConfig.preSharedKey = ssidPassword;
-
-            Method setConfigMethod = this.wifiManager.getClass().getMethod("setWifiApConfiguration", WifiConfiguration.class);
-            setConfigMethod.invoke(this.wifiManager, wifiConfig);
-            int netId = wifiManager.addNetwork(wifiConfig);
-            wifiManager.disconnect();
-            wifiManager.enableNetwork(netId, true);
-            wifiManager.reconnect();
-
-            return true;
-        } catch (Exception e) {
-
-            return false;
-        }
-    }
-
-/*
-
-    public String currentPassword() {
+    public String currentWifiPassword() {
 
         String password="";
         try {
 
             Method getConfigMethod = this.wifiManager.getClass().getMethod("getWifiApConfiguration");
             WifiConfiguration wifiConfig = (WifiConfiguration) getConfigMethod.invoke(this.wifiManager);
-            password=wifiConfig.preSharedKey.toString();
+
+                password = wifiConfig.preSharedKey.toString();
+
 
 
         }
@@ -366,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
           password=e.getMessage();
         }
         return password;
-    }*/
+    }
 
 
 }

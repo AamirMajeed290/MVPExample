@@ -25,7 +25,7 @@
 
         <ImageView
             android:layout_width="63dp"
-            android:contentDescription="@string/show_wifi_image"
+
             android:layout_height="36dp"
             app:srcCompat="@drawable/wifi"
             android:id="@+id/imageView2"
