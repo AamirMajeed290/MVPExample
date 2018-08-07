@@ -348,7 +348,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
 
-
+/*
     public String currentPassword() {
 
         String password="";
@@ -368,6 +368,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         return password;
     }
 
-    
+    */
 }
 
