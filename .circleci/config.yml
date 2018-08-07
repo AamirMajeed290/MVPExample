@@ -32,4 +32,4 @@ jobs:
       develop:
         branch: master
         commands:
-          - ./deploy_master.sh
+          - ipa distribute:hockeyapp -m "circleci build" --token $HOCKEYAPP_TOKEN
