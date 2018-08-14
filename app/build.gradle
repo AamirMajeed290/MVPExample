@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "example.code.mvpexample"
-        minSdkVersion 23
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -41,7 +41,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
 
     implementation 'net.hockeyapp.android:HockeySDK:5.1.0'
-   // implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'eu.chainfire:libsuperuser:1.0.0.+'
+
+    // implementation 'com.google.firebase:firebase-core:16.0.1'
 }
 
 //apply plugin: 'com.google.gms.google-services'

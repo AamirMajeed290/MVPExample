@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import example.code.mvpexample.BasePresenter;
 import example.code.mvpexample.BaseView;
+
 import example.code.mvpexample.network.model.Reply;
 import example.code.mvpexample.network.model.apipojos.Results;
 import example.code.mvpexample.network.model.apipojos.Wifi;
@@ -17,6 +18,7 @@ public interface MainActivityContract {
         void getWifies(String d);
         void getWifies();
         void addWifi(Wifi wifi);
+        void deleteWifi(String s);
 
 
 

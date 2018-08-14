@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import example.code.mvpexample.network.model.ApiClient;
 import example.code.mvpexample.network.model.ApiService;
+
 import example.code.mvpexample.network.model.Reply;
 import example.code.mvpexample.network.model.apipojos.Results;
 import example.code.mvpexample.network.model.apipojos.Wifi;
@@ -63,7 +64,38 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
         );
     }
+public void deleteWifi(String s)
+{
+    apiService= ApiClient.getClient(context).create(ApiService.class);
+    compositeDisposable.add(
 
+            apiService.deleteWifi(s)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<Reply>()
+
+                                   {
+
+                                       @Override
+                                       public void onSuccess(Reply reply) {
+                                           view.setResults(reply);
+
+
+
+
+                                       }
+
+                                       @Override
+                                       public void onError(Throwable e) {
+                                           view.setErrorMessage(e.getMessage());
+                                       }
+                                   }
+                    )
+
+
+
+    );
+}
 
     public void getWifies(String d)
     {
